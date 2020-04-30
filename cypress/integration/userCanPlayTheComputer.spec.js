@@ -12,4 +12,14 @@ describe("User can play RPS vs the Computer", () => {
         cy.get('button#rock').click();
         cy.contains('div#result', /Win: \d*, Draw: \d*, Loss: \d*/).should('exist')
     })
+
+    it("has a hard mode", () => {
+        cy.visit('/')
+        cy.within('div#selector', () => {
+            cy.get('[type="radio"]').first.check()
+            cy.should('contain', "Easy Mode")
+            cy.get('[type="radio"]').last.check()
+            cy.should('contain', "Hard Mode")
+        })
+    })
 })

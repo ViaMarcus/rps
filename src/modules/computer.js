@@ -1,31 +1,32 @@
+const options = ['Rock', 'Paper', 'Scissors'];
+
+function random3(){
+    return Math.floor(Math.random()*3)
+}
+
 export const GenerateThrow = () => {
-    const options = ['Rock', 'Paper', 'Scissors'];
-    const rand = Math.floor(Math.random()*3)
-    return options[rand]
+    return options[random3()]
 }
 
 export const GetWinner = (user, comp) => {
-    const options = ['Rock', 'Paper', 'Scissors'];
-    user = options.findIndex(val => val == user)
-    comp = options.findIndex(val => val == comp)
+    user = options.indexOf(user)
+    comp = options.indexOf(comp)
     let winner = ((user-comp+3)%3)
     return winner;
 }
 
 export const WinMessage = outcome => {
-    let message;
-    switch (outcome) {
-        case 0: 
-            message = "It's a draw";
-            break;
-        case 1:
-            message = "You won"
-            break;
-        case 2:
-            message = "You lost"
-            break;
-        default:
-            break;
-    }
-    return message;
+    let message = ["It's a draw", "You won", "You lost"]
+    return message[outcome];
+}
+
+export const GeneratePredict = history => {
+    let ops = ['R', 'P', 'S']
+    const beats = ['Paper','Scissors','Rock']
+    let reg = /^(.+).*?(.)\1/
+    let match = reg.exec(history)
+    let predict = match != null ? ops.indexOf(match[2]) : random3()
+    console.log(predict)
+    console.log(beats[ops.indexOf(predict)])
+    return beats[predict]
 }
