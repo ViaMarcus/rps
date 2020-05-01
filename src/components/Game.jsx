@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { GenerateThrow, GetWinner, WinMessage, GeneratePredict } from '../modules/computer.js'
+import Controller from "./Controller"
 
 class Game extends Component {
     state = {
@@ -60,6 +61,9 @@ class Game extends Component {
                     <button id="paper" onClick={ () => this.onClickHandler("Paper") }>Paper</button>
                     <button id="scissors" onClick={ () => this.onClickHandler("Scissors") }>Scissors</button>
                 </div>
+                <Controller
+                    version="3"
+                />
             </>
         )
     }
