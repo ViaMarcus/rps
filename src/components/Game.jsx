@@ -63,6 +63,7 @@ class Game extends Component {
                 </div>
                 <Controller
                     version="3"
+                    onClickHandler={this.onClickHandler}
                 />
             </>
         )
