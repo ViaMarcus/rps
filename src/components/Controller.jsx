@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Controller extends Component {
     state = {
-        version: 3,
+        version: 5,
         onClickHandler: this.props.onClickHandler
     };
 
@@ -14,7 +14,10 @@ class Controller extends Component {
         let rotate = Math.PI/2;
         let out = [];
         for (let i = 0; i < version; i++) {
-            out.push(<path onClick={() => this.state.onClickHandler(throws[i])} fill={colors[i]} id={ids[i]} key={ids[i]} d={`M ${this.getXY(angle*i+rotate)} A 1 1 0 0 1 ${this.getXY(angle*(i+1)+rotate)} L 0 0`} />)
+            let rot = angle*i+rotate
+            let adjust = version == 5 ? 0.6 : 1
+            out.push(<path onClick={() => this.state.onClickHandler(throws[i])} fill={colors[i]} id={ids[i]} key={ids[i]} d={`M ${this.getXY(rot)} A 1 1 0 0 1 ${this.getXY(angle*(i+1)+rotate)} L 0 0`} />)
+            out.push(<text x={Math.cos(rot+adjust)*70-4*throws[i].length} fill="black" y={Math.sin(rot+adjust)*70} transform={`scale(0.01)`}>{throws[i]}</text>)
         }
         return out;
     }
