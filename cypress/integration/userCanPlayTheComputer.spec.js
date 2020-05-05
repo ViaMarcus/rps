@@ -3,8 +3,8 @@ describe("User can play RPS vs the Computer", () => {
         cy.visit("/");
         cy.get('button#rock').click();
         cy.get('div#result').should('contain', 'Player chose Rock')
-        cy.get("div#result").contains(/Computer chose (Rock|Paper|Scissors)/).should('exist')
-        cy.get("div#result").contains(/(You (won|lost))|(It's a draw)/).should('exist')
+        cy.contains("div#result", /Computer chose (Rock|Paper|Scissors)/).should('exist')
+        cy.contains("div#result", /(You (won|lost))|(It's a draw)/).should('exist')
     })
 
     it("shows statistics", () => {
@@ -15,11 +15,15 @@ describe("User can play RPS vs the Computer", () => {
 
     it("has a hard mode", () => {
         cy.visit('/')
-        cy.within('div#selector', () => {
-            cy.get('[type="radio"]').first.check()
-            cy.should('contain', "Easy Mode")
-            cy.get('[type="radio"]').last.check()
-            cy.should('contain', "Hard Mode")
+        cy.get('[type="radio"]').first().check()
+        cy.get('[type="radio"]').last().check()
+    })
+
+    it("using the controller", () => {
+        cy.visit('/')
+        cy.get('svg#controller').within(() => {
+            cy.get('path#rock').click();
         })
+        cy.get('div#result').should('contain', 'Player chose Rock')
     })
 })

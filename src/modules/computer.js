@@ -26,7 +26,5 @@ export const GeneratePredict = history => {
     let reg = /^(.+).*?(.)\1/
     let match = reg.exec(history)
     let predict = match != null ? ops.indexOf(match[2]) : random3()
-    console.log(predict)
-    console.log(beats[ops.indexOf(predict)])
     return beats[predict]
 }
