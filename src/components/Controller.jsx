@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 class Controller extends Component {
     state = {
-        version: 5,
         onClickHandler: this.props.onClickHandler
     };
 
@@ -15,9 +14,26 @@ class Controller extends Component {
         let out = [];
         for (let i = 0; i < version; i++) {
             let rot = angle*i+rotate
-            let adjust = version == 5 ? 0.6 : 1
-            out.push(<path onClick={() => this.state.onClickHandler(throws[i])} fill={colors[i]} id={ids[i]} key={ids[i]} d={`M ${this.getXY(rot)} A 1 1 0 0 1 ${this.getXY(angle*(i+1)+rotate)} L 0 0`} />)
-            out.push(<text x={Math.cos(rot+adjust)*70-4*throws[i].length} fill="black" y={Math.sin(rot+adjust)*70} transform={`scale(0.01)`}>{throws[i]}</text>)
+            let adjust = version === 5 ? 0.6 : 1
+            out.push(
+              <path 
+                onClick={() => this.state.onClickHandler(throws[i])} 
+                fill={colors[i]} id={ids[i]} 
+                key={"path-" + ids[i]} 
+                d={`M ${this.getXY(rot)} A 1 1 0 0 1 ${this.getXY(angle*(i+1)+rotate)} L 0 0`} 
+              />
+            )
+            out.push(
+              <text
+                key={"text-" + ids[i]}
+                onClick={() => this.state.onClickHandler(throws[i])} 
+                x={Math.cos(rot+adjust)*70-4*throws[i].length} 
+                fill="black" 
+                y={Math.sin(rot+adjust)*70} 
+                transform={`scale(0.01)`}>
+                {throws[i]}
+              </text>
+            )
         }
         return out;
     }
@@ -36,7 +52,7 @@ class Controller extends Component {
                     viewBox="-1,-1 2 2"
                     id="controller"
                 >
-                    { this.pathArray(this.state.version) }
+                    { this.pathArray(parseInt(this.props.version)) }
                 </svg>
             </div>
         )
