@@ -2,16 +2,8 @@ import React, { Component } from 'react';
 
 class Controller extends Component {
     state = {
-        version: 3,
         onClickHandler: this.props.onClickHandler
     };
-
-    componentDidUpdate() {
-      if( this.props.version != this.state.version ) { 
-        this.setState({ version: parseInt(this.props.version) })
-      }
-      return null;
-    }
 
     pathArray(version) {
         let colors = ['red', 'yellow', 'grey','green','blue'];
@@ -60,7 +52,7 @@ class Controller extends Component {
                     viewBox="-1,-1 2 2"
                     id="controller"
                 >
-                    { this.pathArray(this.state.version) }
+                    { this.pathArray(parseInt(this.props.version)) }
                 </svg>
             </div>
         )
