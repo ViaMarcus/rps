@@ -8,7 +8,8 @@ class Game extends Component {
         computerThrow: "",
         stats: [0,0,0],
         mode: "easy",
-        history: ""
+        history: "",
+        version: "three"
     }
     
     onClickHandler = choice => {
@@ -25,6 +26,7 @@ class Game extends Component {
     }
 
     onModeChange = e => {
+        console.log(e)
         this.setState( {[e.target.name]: e.target.value} )
     }
 
@@ -56,13 +58,34 @@ class Game extends Component {
                 />
                 <label id="radio" htmlFor="hard">Hard</label>
                 </div>
+
+                <div id="version">
+                <input 
+                    defaultChecked="three"
+                    type="radio"
+                    id="three"
+                    name="version"
+                    value="three"
+                    onChange={this.onModeChange}
+                />
+                <label id="radio" htmlFor="three">RPS</label>
+                <input 
+                    type="radio"
+                    id="five"
+                    name="version"
+                    value="five"
+                    onChange={this.onModeChange}
+                />
+                <label id="radio" htmlFor="five">RPSLS</label>
+                </div>
+
                 <div id="player1">
                     <button id="rock" onClick={ () => this.onClickHandler("Rock") }>Rock</button>
                     <button id="paper" onClick={ () => this.onClickHandler("Paper") }>Paper</button>
                     <button id="scissors" onClick={ () => this.onClickHandler("Scissors") }>Scissors</button>
                 </div>
                 <Controller
-                    version="3"
+                    version={this.state.version}
                     onClickHandler={this.onClickHandler}
                 />
             </>
