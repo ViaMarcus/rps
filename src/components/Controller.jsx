@@ -6,9 +6,11 @@ class Controller extends Component {
         onClickHandler: this.props.onClickHandler
     };
 
-    componentWillReceiveProps(nextProps) {
-      let version = nextProps.version == "five" ? 5 : 3;
-      this.setState({ version });
+    componentDidUpdate() {
+      if( this.props.version != this.state.version ) { 
+        this.setState({ version: parseInt(this.props.version) })
+      }
+      return null;
     }
 
     pathArray(version) {
@@ -20,7 +22,7 @@ class Controller extends Component {
         let out = [];
         for (let i = 0; i < version; i++) {
             let rot = angle*i+rotate
-            let adjust = version == 5 ? 0.6 : 1
+            let adjust = version === 5 ? 0.6 : 1
             out.push(
               <path 
                 onClick={() => this.state.onClickHandler(throws[i])} 
@@ -49,7 +51,6 @@ class Controller extends Component {
     }
 
     render() {
-        console.log("render" + this.state.version)
         return (
             <div>
                 <svg 
