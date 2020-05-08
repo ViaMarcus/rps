@@ -1,0 +1,61 @@
+body {
+  background-color: bisque;
+  overflow: hidden;
+}
+
+#title{
+  text-align: center;
+  font-size: 4em;
+}
+
+#settings {
+  justify-content: space-around;
+  background-color: burlywood;
+  width: 100%;
+  display: flex;
+}
+
+#mode, #version, #stats {
+  display: inline-flex;
+  font-size: xx-large;
+}
+
+#stats {
+  width: 28%;
+}
+
+a {
+  white-space: pre;
+  font-size: xx-large;
+}
+
+input {
+  height: 2rem;
+  width: 1.3rem;
+  transform: scale(1.3);
+  margin-left: 15px;
+}
+
+#players {
+  display: flex;
+  width: 100%;
+}
+#player, #computer {
+  width: 50%;
+  text-align: center;
+  height: 70vh;
+}
+
+#player {
+  border-right: 2px burlywood solid;
+}
+
+img {
+  width: 20vw;
+  height: auto;
+}
+.image {
+  width: 20vw;
+  display: inline-flex;
+  height: 40vh;
+}
